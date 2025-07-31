@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: production-monitoring
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: production-monitoring-db
+          property: connectionString
+
+databases:
+  - name: production-monitoring-db
+    databaseName: production_monitoring
+    user: production_user
