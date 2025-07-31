@@ -2,17 +2,16 @@ services:
   - type: web
     name: production-monitoring
     env: node
+    rootDir: server
     buildCommand: npm install && npm run build
-    startCommand: npm start
+    startCommand: npm run start
     envVars:
       - key: NODE_ENV
-        value: production
-      - key: DATABASE_URL
-        fromDatabase:
-          name: production-monitoring-db
-          property: connectionString
+        value: development
 
-databases:
-  - name: production-monitoring-db
-    databaseName: production_monitoring
-    user: production_user
+  - type: web
+    name: production-monitoring-client
+    env: static
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
